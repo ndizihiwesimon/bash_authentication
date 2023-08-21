@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# Define the string you want to search for
+search_string="YourSearchString"
+
+# Define the path to the file
+file_path="path/to/your/file.txt"
+
+# Use grep to find the line containing the search string
+matched_line=$(grep "$search_string" "$file_path")
+
+# Use awk to extract the substring after the last ':' in the matched line
+substring=$(echo "$matched_line" | awk -F ':' '{print $NF}')
+
+# Print the result
+echo "Substring after last ':': $substring"
+
+
+
+#!/bin/bash
+
+input="abc:def:ghi:jkl:mno:pqr"
+
+result=$(echo "$input" | cut -d':' -f4-)
+
+echo "Substring after the third ':' is: $result"
+
+
+
+#!/bin/bash
+
+input="abc:def:ghi:jkl:mno:pqr"
+
+result=$(echo "$input" | sed 's/.*:.*:.*:\(.*\)/\1/')
+
+echo "Substring after the third ':' is: $result"
+
+#!/bin/bash
+
+input="abc:def:ghi:jkl:mno:pqr"
+
+# Remove everything before the third ':'
+result="${input##*:*:*:}"
+
+echo "Substring after the third ':' is: $result"
